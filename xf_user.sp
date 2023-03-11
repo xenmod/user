@@ -1,5 +1,5 @@
 /**
- * Just replace "Sample" and "sample" with your entity name.
+ * Just replace "User" and "user" with your entity name.
  */
 
 #pragma semicolon 1
@@ -9,9 +9,9 @@
 
 #pragma newdecls required
 
-#include "xf_sample/entity/sample.sp"
+#include "xf_user/entity/user.sp"
 
-#include "xf_sample/natives.sp"
+#include "xf_user/natives.sp"
 
 public Plugin myinfo =
 {
@@ -22,5 +22,5 @@ public Plugin myinfo =
 
 public void OnNotifyPluginUnloaded(Handle plugin)
 {
-	XFSample_OnOwnerUnloaded(plugin);
+	XFUser_OnOwnerUnloaded(plugin);
 }

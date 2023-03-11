@@ -1,18 +1,18 @@
-#if defined _xf_sample_included
+#if defined _xf_user_included
     #endinput
 #endif
-#define _xf_sample_included
+#define _xf_user_included
 
 #if !defined _xf_api_included
     #include <xf_api>
 #endif
 
-#include <xf_api/sample>
+#include <xf_api/user>
 
-public SharedPlugin __pl_xf_sample= 
+public SharedPlugin __pl_xf_user= 
 {
-	name = "xf_sample",
-	file = "xf_sample.smx",
+	name = "xf_user",
+	file = "xf_user.smx",
 #if defined REQUIRE_PLUGIN
 	required = 1
 #else
@@ -21,10 +21,10 @@ public SharedPlugin __pl_xf_sample=
 };
 
 #if !defined REQUIRE_PLUGIN
-public void __pl_xf_sample_SetNTVOptional()
+public void __pl_xf_user_SetNTVOptional()
 {
-	MarkNativeAsOptional("XFSample.XFSample");
+	MarkNativeAsOptional("XFUser.XFUser");
 
-    MarkNativeAsOptional("XFSample.Delete");
+    MarkNativeAsOptional("XFUser.Delete");
 }
 #endif

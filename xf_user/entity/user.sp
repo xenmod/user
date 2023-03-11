@@ -1,31 +1,31 @@
-int __xfsample_increment = 0;
-ArrayList __XFSampleList;
+int __xfuser_increment = 0;
+ArrayList __XFUserList;
 
 
-XFSample XFSample_ById(int id, Handle plugin)
+XFUser XFUser_ById(int id, Handle plugin)
 {
     int pos;
-    if (!__XFSampleList || (pos = __XFSampleList.FindValue(id)) == -1 || __XFSampleList.Get(pos, 1) != plugin)
+    if (!__XFUserList || (pos = __XFUserList.FindValue(id)) == -1 || __XFUserList.Get(pos, 1) != plugin)
     {
-        ThrowNativeError(SP_ERROR_INDEX, "Invalid Object(XFSample) (%i)", id);
+        ThrowNativeError(SP_ERROR_INDEX, "Invalid Object(XFUser) (%i)", id);
     }
 
-    return view_as<XFSample>(id);
+    return view_as<XFUser>(id);
 }
 
-void XFSample_OnOwnerUnloaded(Handle owner)
+void XFUser_OnOwnerUnloaded(Handle owner)
 {
-    if (__XFSampleList)
+    if (__XFUserList)
     {
         int pos;
-        while ((pos = __XFSampleList.FindValue(owner, 1)) != -1)
+        while ((pos = __XFUserList.FindValue(owner, 1)) != -1)
         {
-            view_as<XFSample>(__XFSampleList.Get(pos)).Delete();
+            view_as<XFUser>(__XFUserList.Get(pos)).Delete();
         }
     }
 }
 
-enum struct XFSampleData
+enum struct XFUserData
 {
     int index;
     Handle owner;
@@ -36,25 +36,25 @@ enum struct XFSampleData
     }
 }
 
-methodmap XFSample __nullable__
+methodmap XFUser __nullable__
 {
-    public XFSample(Handle owner = INVALID_HANDLE)
+    public XFUser(Handle owner = INVALID_HANDLE)
     {
-        XFSampleData data;
+        XFUserData data;
 
-        if (__xfsample_increment == 0)
+        if (__xfuser_increment == 0)
         {
-            __XFSampleList = new ArrayList(sizeof data);
+            __XFUserList = new ArrayList(sizeof data);
         }
 
-        __xfsample_increment++;
+        __xfuser_increment++;
 
-        data.index = __xfsample_increment;
+        data.index = __xfuser_increment;
         data.owner = owner;
 
-        __XFSampleList.PushArray(data);
+        __XFUserList.PushArray(data);
 
-        return view_as<XFSample>(__xfsample_increment);
+        return view_as<XFUser>(__xfuser_increment);
     }
 
     /**
@@ -71,23 +71,23 @@ methodmap XFSample __nullable__
     /**
      * Functions
      */
-    public void GetData(XFSampleData data)
+    public void GetData(XFUserData data)
     {
-        __XFSampleList.GetArray(__XFSampleList.FindValue(this.index), data);
+        __XFUserList.GetArray(__XFUserList.FindValue(this.index), data);
     }
 
-    public void SetData(XFSampleData data)
+    public void SetData(XFUserData data)
     {
-        __XFSampleList.SetArray(__XFSampleList.FindValue(this.index), data);
+        __XFUserList.SetArray(__XFUserList.FindValue(this.index), data);
     }
 
     public void Delete()
     {
-        XFSampleData data;
+        XFUserData data;
         this.GetData(data);
 
         data.free();
 
-        __XFSampleList.Erase(__XFSampleList.FindValue(this.index));
+        __XFUserList.Erase(__XFUserList.FindValue(this.index));
     }
 }
