@@ -15,8 +15,8 @@
 
 public Plugin myinfo =
 {
-	name    = "",
-	author	= "",
+	name    = "[XM] User",
+	author	= "github.com/xenmod",
 	version = "1.0.0 b_"...SOURCEMOD_VERSION
 };
 
